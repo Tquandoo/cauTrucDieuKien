@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id = "month" placeholder="VD:1,2,3...">
+    <button type="button" onclick="search()">search</button>
+    <script>
+        function search(){
+            let m = parseInt(document.getElementById("month").value);
+            if(m === 1 || m === 3 || m ===5 || m === 7 || m === 8 || m===10 || m===12){
+                alert(m + " " + "có 31 ngày");
+            }
+            else if( m === 4 || m === 6 || m === 9 || m===11){
+                alert(m + " " + "có 30 ngày");
+            }
+            else if( m === 2){
+                alert(m + " " + "có 28 ngày hoặc 29 ngày");
+            }
+            else{
+                alert(m + " " + "không tồn tại");
+            }
+        }
+    </script>
+</body>
+</html>
