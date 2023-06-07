@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chuyển đổi tiền tệ</title>
+    <script>
+        function convertCurrency() {
+            // Lấy giá trị từ các trường trong form
+            var amount = parseFloat(document.getElementById("amount").value);
+            var fromCurrency = document.getElementById("fromCurrency").value;
+            var toCurrency = document.getElementById("toCurrency").value;
+            
+            // Kiểm tra xem các trường đã được nhập đầy đủ hay chưa
+            if (isNaN(amount) || amount <= 0) {
+                alert("Vui lòng nhập số tiền hợp lệ.");
+                return;
+            }
+            
+            if (fromCurrency === toCurrency) {
+                alert("Đồng tiền gốc và đồng tiền chuyển đổi phải khác nhau.");
+                return;
+            }
+            
+            // Tính giá trị sau khi chuyển đổi
+            var result = calculateExchangeRate(amount, fromCurrency, toCurrency);
+            
+            // Hiển thị kết quả
+            document.getElementById("result").innerHTML = result.toFixed(2) + " " + toCurrency;
+        }
+        
+        function calculateExchangeRate(amount, fromCurrency, toCurrency) {
+            // Định nghĩa các tỉ giá chuyển đổi
+            var exchangeRate;
+            
+            if (fromCurrency === "VND" && toCurrency === "USD") {
+                exchangeRate = 0.000043;
+            } else if (fromCurrency === "USD" && toCurrency === "VND") {
+                exchangeRate = 23182.50;
+            } else {
+                alert("Không tìm thấy tỉ giá chuyển đổi.");
+                return 0;
+            }
+            
+            return amount * exchangeRate;
+        }
+    </script>
+</head>
+<body>
+    <h1>Chuyển đổi tiền tệ</h1>
+    <form>
+        <label>From Currency:</label>
+        <select id="fromCurrency">
+            <option value="VND">Việt Nam Đồng</option>
+            <option value="USD">Đô-la Mỹ</option>
+            <!-- Thêm các đồng tiền khác tại đây -->
+        </select>
+        <br>
+        
+        <label>To Currency:</label>
+        <select id="toCurrency">
+            <option value="VND">Việt Nam Đồng</option>
+            <option value="USD">Đô-la Mỹ</option>
+            <!-- Thêm các đồng tiền khác tại đây -->
+        </select>
+        <br>
+        
+        <label>Amount:</label>
+        <input type="number" id="amount">
+        <br>
+        
+        <button type="button" onclick="convertCurrency()">Convert</button>
+    </form>
+    
+    <h2>Result:</h2>
+    <div id="result"></div>
+</body>
+</html>
